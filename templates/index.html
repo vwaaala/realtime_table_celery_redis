@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Real Time - Crypto</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<section class="section">
+    {% verbatim %}
+
+    <div class="container" id="app">
+        <h1 class="subtitle">
+            API: Coingecko
+        </h1>
+        <hr>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Current Price</th>
+                <th>High 24h</th>
+                <th>Low 24h</th>
+                <th>Price change 24h</th>
+                <th>Price change % 24h</th>
+                <th>Market cap change 24h</th>
+                <th>Market cap change % 24h</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr v-for="coin in coins" :key="coin.id">
+                <td>{{ coin.market_cap_rank }}</td>
+                <td><img :src="coin.image" style="max-width: 25px;max-height: 25px;"> {{ coin.name }}</td>
+                <td :class="{'fall': coin.state ==='fall', 'raise': coin.state ==='raise'}">{{ coin.current_price }}</td>
+                <td>{{ coin.high_24h }}</td>
+                <td>{{ coin.low_24h }}</td>
+                <td>{{ coin.price_change_24h }}</td>
+                <td>{{ coin.price_change_percentage_24h }}</td>
+                <td>{{ coin.market_cap_change_24h }}</td>
+                <td>{{ coin.market_cap_change_percentage_24h }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    {% endverbatim %}
+</section>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.2.31/dist/vue.global.prod.js"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>
